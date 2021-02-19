@@ -13,9 +13,9 @@ class Geometry
         return pi() * $radius * 2;
     }
 
-    static function areaOfRectangle(float $Length, float $Width): float
+    static function areaOfRectangle(float $length, float $width): float
     {
-        return $Length * $Width;
+        return $length * $width;
     }
 
     static function areOfTriangle(float $base, float $height): float
