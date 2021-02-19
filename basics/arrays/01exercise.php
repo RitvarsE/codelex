@@ -7,12 +7,12 @@ $numbers = [
 ];
 
 //todo
-echo "Original numeric array: " . implode(',', $numbers) . PHP_EOL;
+echo "Original numeric array: " . print_r($numbers) . PHP_EOL;
 
 //todo
 $sortedNumbers = $numbers;
 sort($sortedNumbers); // lai nesortētu oriģinālo masīvu
-echo "Sorted numeric array: " . implode(',', $sortedNumbers) . PHP_EOL;
+echo "Sorted numeric array: " . print_r($sortedNumbers) . PHP_EOL;
 
 $words = [
     "Java",
@@ -24,9 +24,9 @@ $words = [
 ];
 
 //todo
-echo "Original string array: " . implode($words) . PHP_EOL;
+echo "Original string array: " . print_r($words) . PHP_EOL;
 
 //todo
 $sortedWords = $words;
 sort($sortedWords); // lai nesortētu oriģinālo masīvu
-echo "Sorted string array: " . implode($sortedWords);
+echo "Sorted string array: " . print_r($sortedWords). PHP_EOL;
