@@ -11,8 +11,8 @@ function checkAge($age): bool
 
 foreach ($persons as $person) {
     if (checkAge($person->age)) {
-        echo "$person->name has reached 18.";
+        echo "$person->name has reached 18." . PHP_EOL;
     } else {
-        echo "$person->name is underage.";
+        echo "$person->name is underage." . PHP_EOL;
     }
 }

@@ -13,11 +13,11 @@ $number_array = [
     'beststring'
 ];
 for ($x = 0; $x < count($number_array); $x++) {
-    echo double_integer($number_array[$x]);
-}
-function double_integer($number)
-{
-    if ($number == is_int($number)) {
-        return $number * 2;
+    if (is_int($number_array[$x])) {
+        echo double_integer($number_array[$x]) . PHP_EOL;
     }
+}
+function double_integer($number): float
+{
+    return $number * 2;
 }

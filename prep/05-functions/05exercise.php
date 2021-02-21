@@ -9,15 +9,15 @@ $products = [
 $shippingCost = [
     'over10' => 2,
     'under10' => 1];
-function ship_cost($products, $shippingCost): string
+function ship_cost($product, $shippingCost): string
 {
-    foreach ($products as $product) {
-        if ($product['weight'] > 10) {
-            return "Your {$product['fruit']} shipping cost is {$shippingCost['over10']} euros.\n";
-        } else {
-            return "Your {$product['fruit']} shipping cost is {$shippingCost['under10']} euro.\n";
-        }
+    if ($product['weight'] > 10) {
+        return "Your {$product['fruit']} shipping cost is {$shippingCost['over10']} euros." . PHP_EOL;
+    } else {
+        return "Your {$product['fruit']} shipping cost is {$shippingCost['under10']} euro." . PHP_EOL;
     }
 }
 
-echo ship_cost($products, $shippingCost);
+foreach ($products as $product) {
+    echo ship_cost($product, $shippingCost);
+}
