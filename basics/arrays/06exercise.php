@@ -27,13 +27,16 @@ function guessWord($words)
     $inputLetter = null;
     $guessTemplate = str_repeat(' _', strlen($word));
     $livesLeft = 5;
+
     while ($word !== str_replace(' ', '', $guessTemplate)) {
         echo str_repeat('=-', 15) . PHP_EOL .
             'Word: ' . $guessTemplate . PHP_EOL .
             'Misses: ' . $unGuessedLetters . PHP_EOL .
             'Guess: ' . strtolower($inputLetter) . PHP_EOL .
             'Lives Left: ' . $livesLeft . PHP_EOL;
+
         $inputLetter = readline('Guess the word, input letter: ');
+
         if (strlen($inputLetter) !== 1) {
             echo '***YOU MUST INPUT ONLY ONE LETTER***' . PHP_EOL;
         } elseif (strpos($unGuessedLetters, $inputLetter) !== false || strpos($guessTemplate, $inputLetter) !== false) {
@@ -48,6 +51,7 @@ function guessWord($words)
             echo 'You lost, you had 5 wrong guesses. The word was: ' . ucfirst($word) . PHP_EOL;
             playAgain($words);
         }
+
         for ($x = 0; $x < strlen($word); $x++) {
             if (strtolower($inputLetter) === $word[$x]) {
                 $guessTemplate[$x * 2 + 1] = strtolower($inputLetter);
