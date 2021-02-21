@@ -19,19 +19,19 @@ function startGame($board): string
                 } else {
                     echo $cell . ' ';
                 }
-                if ($cell === 'x') {
+                if ($cell === 'X') {
                     $countX++;
                 }
-                if ($cell === 'o') {
+                if ($cell === 'O') {
                     $countY++;
                 }
             }
         }
 
         if ($countX > $countY) {
-            $whoseTurn = 'o';
+            $whoseTurn = 'O';
         } else {
-            $whoseTurn = 'x';
+            $whoseTurn = 'X';
         }
         if ($countX === 5 && !isWinner($board)) {
             return 'The game is tied.';
