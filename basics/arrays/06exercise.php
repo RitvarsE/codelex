@@ -28,18 +28,15 @@ function guessWord($words)
     $guessTemplate = str_repeat(' _', strlen($word));
     $livesLeft = 5;
     while ($word !== str_replace(' ', '', $guessTemplate)) {
-        echo str_repeat('=-', strlen($word) * 2) . PHP_EOL .
+        echo str_repeat('=-', 15) . PHP_EOL .
             'Word: ' . $guessTemplate . PHP_EOL .
             'Misses: ' . $unGuessedLetters . PHP_EOL .
             'Guess: ' . strtolower($inputLetter) . PHP_EOL .
             'Lives Left: ' . $livesLeft . PHP_EOL;
         $inputLetter = readline('Guess the word, input letter: ');
-        if (strpos($guessTemplate, $inputLetter) !== false) {
-            echo '***YOU ALREADY GUESSED THIS LETTER, TRY ANOTHER***' . PHP_EOL;
-        }
         if (strlen($inputLetter) !== 1) {
             echo '***YOU MUST INPUT ONLY ONE LETTER***' . PHP_EOL;
-        } elseif (strpos($unGuessedLetters, $inputLetter) !== false) {
+        } elseif (strpos($unGuessedLetters, $inputLetter) !== false || strpos($guessTemplate, $inputLetter) !== false) {
             echo "***YOU ALREADY TRIED '$inputLetter', TRY ANOTHER LETTER***" . PHP_EOL;
         } elseif (!ctype_alpha($inputLetter)) {
             echo '*** YOU MUST USE ONLY ALPHABETIC LETTERS***' . PHP_EOL;
