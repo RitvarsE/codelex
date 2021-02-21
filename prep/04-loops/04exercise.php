@@ -13,6 +13,6 @@ $numbers = [
 ];
 foreach ($numbers as $values) {
     if ($values % 3 === 0) {
-        echo $values . "\n";
+        echo $values . PHP_EOL;
     }
 }

@@ -53,5 +53,3 @@ if ($yourChoice < 1 || $yourChoice > 4) {
 } else {
     echo "You are quitting my cool Geometry Calculator.";
 }
-// biju sākumā uztaisījis visu ar do while loopu, kur, ja ir ievadīta izvēle zem 1 vai 4 vai arī negatīvi parametri, tad prasa vēlreiz vadīt
-// bet tas būtu kā labāk, bet neatbilstu uzdevumam. Pārtaisīju visu, lai izvada erroru.

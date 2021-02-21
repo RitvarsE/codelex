@@ -3,10 +3,10 @@
 function CheckOddEven(int $number): string
 {
     if ($number % 2 !== 0) {
-        return $number . ' is Odd Number. bye!';
+        return $number . ' is Odd Number. ';
     }
-    return $number . ' is Even Number. bye!';
+    return $number . ' is Even Number. ';
 }
 
-$number = readline("Insert number: ");
-echo CheckOddEven($number);
+$number = readline("Input number: ");
+echo CheckOddEven($number) . 'bye!';

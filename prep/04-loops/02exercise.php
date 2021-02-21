@@ -12,5 +12,5 @@ $numbers = [
     20
 ];
 for ($x = 0; $x < count($numbers); $x++) {
-    echo $numbers[$x] . "\n";
+    echo $numbers[$x] . PHP_EOL;
 }

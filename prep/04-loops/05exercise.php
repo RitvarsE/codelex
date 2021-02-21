@@ -15,5 +15,5 @@ $persons = [
 ];
 foreach ($persons as $person) {
 
-    echo $person["name"] . "\n" . $person["surname"] . "\n" . $person["age"] . "\n" . $person["birthday"] . "\n";
+    echo $person["name"] . PHP_EOL . $person["surname"] . PHP_EOL . $person["age"] . PHP_EOL . $person["birthday"] . PHP_EOL;
 }

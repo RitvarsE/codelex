@@ -11,5 +11,5 @@ $numbers = [
     9,
     10];
 foreach ($numbers as $values) {
-    echo $values . "\n";
+    echo $values . PHP_EOL;
 }
