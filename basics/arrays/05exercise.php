@@ -37,7 +37,7 @@ function startGame($board): string
             return 'The game is tied.';
         }
 
-        $playerInput = readline('It`s your turn ' . $whoseTurn . ' type in row and column(sensitive input): ');
+        $playerInput = readline('It`s your turn ' . $whoseTurn . ' type in row and column(with blank between): ');
         if ($playerInput === 'q') {
             break;
         }

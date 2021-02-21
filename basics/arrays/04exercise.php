@@ -6,5 +6,5 @@ for ($x = 0; $x < 10; $x++) {
 $arrayCopy = $array;
 array_pop($array);
 array_push($array, -7);
-echo implode(',', $array) . PHP_EOL;
-echo implode(',', $arrayCopy);
+echo 'Array1: ' . implode(',', $array) . PHP_EOL;
+echo 'Array2: ' . implode(',', $arrayCopy);
