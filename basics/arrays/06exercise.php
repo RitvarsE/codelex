@@ -47,6 +47,7 @@ function guessWord($words)
             $unGuessedLetters .= strtolower($inputLetter);
             $livesLeft--;
         }
+
         if (strlen($unGuessedLetters) > 4) {
             echo 'You lost, you had 5 wrong guesses. The word was: ' . ucfirst($word) . PHP_EOL;
             playAgain($words);

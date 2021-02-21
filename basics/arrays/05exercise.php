@@ -4,12 +4,14 @@ $board = [
     ['-', '-', '-'],
     ['-', '-', '-']
 ];
-function startGame($board)
+
+function startGame($board): string
 {
     while (!isWinner($board)) {
 
         $countX = 0;
         $countY = 0;
+
         foreach ($board as $row) {
             foreach ($row as $key => $cell) {
                 if ($key == 2) {
@@ -25,33 +27,44 @@ function startGame($board)
                 }
             }
         }
+
         if ($countX > $countY) {
             $whoseTurn = 'o';
         } else {
             $whoseTurn = 'x';
         }
         if ($countX === 5 && !isWinner($board)) {
-            echo 'The game is tied.';
-            exit;
+            return 'The game is tied.';
         }
-        $playerInput = readline('It`s your turn ' . $whoseTurn . ' type in row column(sensitive input): ');
-        $splitInput = explode(' ', $playerInput);
-        if (strlen($playerInput) > 3
-            || $splitInput[0] > 2
+
+        $playerInput = readline('It`s your turn ' . $whoseTurn . ' type in row and column(sensitive input): ');
+        if ($playerInput === 'q') {
+            break;
+        }
+        if ($playerInput[1] !== ' ') {
+            echo 'Remember it`s type sensitive. You must write row and column and variables are from 0 till 2' . PHP_EOL;
+            continue;
+        } else {
+            $splitInput = explode(' ', $playerInput);
+        }
+        if
+        (strlen($playerInput) > 3) {
+            echo 'Remember it`s type sensitive. You must write row and column and variables are from 0 till 2' . PHP_EOL;
+        } elseif ($splitInput[0] > 2
             || $splitInput[0] < 0
             || $splitInput[1] > 2
             || $splitInput[1] < 0
-            || $board[$splitInput[0]][$splitInput[1]] !== '-'
-            || $playerInput[1] !== ' ') {
-            echo 'Remember it`s type sensitive. You must write row,column and variables are from 0 till 2' . PHP_EOL;
+            || $board[$splitInput[0]][$splitInput[1]] !== '-') {
+            echo 'Remember it`s type sensitive. You must write row and column and variables are from 0 till 2' . PHP_EOL;
         } else {
             array_splice($board[$splitInput[0]], $splitInput[1], 1, $whoseTurn);
         }
     }
-    echo isWinner($board);
+
+    return isWinner($board);
 }
 
-function isWinner($board)
+function isWinner($board): string
 {
     if ($board[0][0] !== '-' && $board[0][0] === $board[0][1] && $board[0][0] === $board[0][2]) {
         return $board[0][0] . ' won the game';
@@ -77,6 +90,7 @@ function isWinner($board)
     if ($board[0][2] !== '-' && $board[0][2] === $board[1][1] && $board[0][2] === $board[2][0]) {
         return $board[0][2] . ' won the game';
     }
+    return '';
 }
 
-startGame($board);
+echo startGame($board);
