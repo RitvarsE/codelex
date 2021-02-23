@@ -1,7 +1,7 @@
 <?php
 
 $wallet = [1 => 10, 2 => 5, 5 => 10, 10 => 5, 20 => 2, 50 => 1, 100 => 1, 200 => 1];
-$type = [['Latte', 190], ['Cappuccino', 200], ['BlackTea', 100], ['HotWater', 50], ['TripleLatte', 600]];
+$type = [['Latte', 190], ['Cappuccino', 200], ['Black Tea', 100], ['Hot Water', 50], ['Triple Latte', 600]];
 
 function walletTotal(array $wallet): int
 {
@@ -16,7 +16,7 @@ function coinsLeft(array $wallet)
 {
     echo 'Coins left: ';
     foreach ($wallet as $coin => $amount) {
-        echo '$' . $coin / 100 . '-' . $amount . ' | ';
+        echo '€' . $coin / 100 . '-' . $amount . ' | ';
     }
     echo PHP_EOL;
 }
@@ -26,14 +26,21 @@ function chooseCoffee(array $wallet, array $type)
     do {
         $x = 1;
         coinsLeft($wallet);
-        echo PHP_EOL . 'Wallet total: $' . walletTotal($wallet) / 100 . PHP_EOL;
+        echo PHP_EOL . 'Wallet total: €' . walletTotal($wallet) / 100 . PHP_EOL;
         foreach ($type as $price) {
-            echo $x++ . ' ' . $price[0] . ' price: $' . $price[1] / 100 . PHP_EOL;
+            echo '[' . $x++ . '] ' . $price[0] . ' price: €' . $price[1] / 100 . PHP_EOL;
         }
+        echo '[' . (count($type) + 1) . '] Exit' . PHP_EOL;
         $inputValue = readline('What coffee do you want: ');
+        if (!checkInput($inputValue, $type)) {
+            print("\033[2J\033[;H");
+            echo PHP_EOL . 'Invalid Input.' . PHP_EOL;
+        }
     } while (!checkInput($inputValue, $type));
-
-    if ($type[$inputValue - 1][1] < walletTotal($wallet)) {
+    if ((count($type) + 1) == $inputValue) {
+        echo 'See you next time, Good day!';
+        exit;
+    } elseif ($type[$inputValue - 1][1] < walletTotal($wallet)) {
         coinInter($wallet, $type, $inputValue);
     } else {
         echo 'You don`t have enough money!';
@@ -44,7 +51,7 @@ function checkInput(string $inputValue, array $type): bool
 {
     if (strlen($inputValue) > 1 ||
         !is_numeric($inputValue) ||
-        $inputValue > count($type) ||
+        $inputValue > (count($type) + 1) ||
         $inputValue < 1) {
         return false;
     }
@@ -68,20 +75,21 @@ function checkCoinAmount(array $wallet, string $inputCoin): int
     }
 }
 
-function coinInter($wallet, $type, $inputValue)
+function coinInter(array $wallet, array $type, string $inputValue)
 {
     $coinSum = 0;
 
     do {
         coinsLeft($wallet) . PHP_EOL;
-        $inputCoin = readline('Input coin: ');
+        $inputCoin = readline('Input coin(1 = 1 cent, 100 = 1€): ');
         if (checkCoin($wallet, $inputCoin)) {
             if (checkCoinAmount($wallet, $inputCoin) > 0) {
                 $coinSum += $inputCoin;
-                echo 'Sum inputted: $' . $coinSum / 100 . PHP_EOL . PHP_EOL;
+                print("\033[2J\033[;H");
+                echo 'Sum inputted: €' . $coinSum / 100 . PHP_EOL . PHP_EOL;
                 $wallet[$inputCoin] = $wallet[$inputCoin] - 1;
             } else {
-                echo 'You don`t have $' . $inputCoin / 100 . ' coins anymore.' . PHP_EOL;
+                echo 'You don`t have €' . $inputCoin / 100 . ' coins anymore.' . PHP_EOL;
             }
         } else {
             echo 'Fraud coin detected, Input valid coins!' . PHP_EOL;
@@ -89,7 +97,7 @@ function coinInter($wallet, $type, $inputValue)
     } while ($coinSum < $type[$inputValue - 1][1]);
     $change = ($coinSum - $type[$inputValue - 1][1]);
     returnCoins($wallet, $change);
-    echo PHP_EOL . 'You bought: ' . $type[$inputValue - 1][0] . PHP_EOL . 'You have left $' . (walletTotal($wallet) + $change) / 100 . ' in your pocket.';
+    echo PHP_EOL . 'You bought: ' . $type[$inputValue - 1][0] . PHP_EOL . 'You have left €' . (walletTotal($wallet) + $change) / 100 . ' in your pocket.';
 }
 
 function returnCoins(array $wallet, int $change)
