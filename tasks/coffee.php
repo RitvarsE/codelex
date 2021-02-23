@@ -43,7 +43,7 @@ function chooseCoffee(array $wallet, array $type)
     } elseif ($type[$inputValue - 1][1] < walletTotal($wallet)) {
         coinInter($wallet, $type, $inputValue);
     } else {
-        echo 'You don`t have enough money!';
+        echo 'You don`t have enough money for: ' . $type[$inputValue - 1][0] . '!';
     }
 }
 
