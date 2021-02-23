@@ -103,10 +103,7 @@ function coinInter(array $wallet, array $type, string $inputValue)
 function returnCoins(array $wallet, int $change)
 {
     while ($change > 0) {
-        if ($change >= 200) {
-            $wallet['200'] = $wallet['200'] + 1;
-            $change = $change - 200;
-        } elseif ($change >= 100) {
+        if ($change >= 100) {
             $wallet['100'] = $wallet['100'] + 1;
             $change = $change - 100;
         } elseif ($change >= 50) {
