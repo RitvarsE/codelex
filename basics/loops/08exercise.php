@@ -17,10 +17,12 @@ Max? 5
 $string = [];
 $startNumber = readline('Input start number: ');
 $endNumber = readline('Input end number: ');
+
 //pārbaudu vai ir vesels cipars, cipars un vai ir pozitīvs cipars
 if (fmod((float)$startNumber, 1) == 0 && is_numeric($startNumber) &&
     fmod((float)$endNumber, 1) == 0 && is_numeric($endNumber) &&
     $startNumber > 0 && $endNumber > 0) {
+
 // pārbaudu vai start numurs ir mazāks par beigu
     if ($endNumber >= $startNumber) {
 
@@ -29,6 +31,7 @@ if (fmod((float)$startNumber, 1) == 0 && is_numeric($startNumber) &&
         }
 
         echo implode('', $string) . PHP_EOL;
+
 //ņemu ārā pirmo elementu, pielieku viņu beigās un printēju uz konsoli, kamēr pēdējais elements nav pirmais.
         while ($string[0] !== (int)$endNumber) {
             $firstElement = array_shift($string);
