@@ -3,6 +3,7 @@
 $wallet = [1 => 10, 2 => 5, 5 => 10, 10 => 5, 20 => 2, 50 => 1, 100 => 1, 200 => 1];
 $type = [['Latte', 190], ['Cappuccino', 200], ['Black Tea', 100], ['Hot Water', 50], ['Triple Latte', 600]];
 
+//kopējais maka daudzums
 function walletTotal(array $wallet): int
 {
     $walletTotal = 0;
@@ -12,41 +13,7 @@ function walletTotal(array $wallet): int
     return $walletTotal;
 }
 
-function coinsLeft(array $wallet)
-{
-    echo 'Coins left: ';
-    foreach ($wallet as $coin => $amount) {
-        echo '€' . $coin / 100 . '-' . $amount . ' | ';
-    }
-    echo PHP_EOL;
-}
-
-function chooseCoffee(array $wallet, array $type)
-{
-    do {
-        $x = 1;
-        coinsLeft($wallet);
-        echo PHP_EOL . 'Wallet total: €' . walletTotal($wallet) / 100 . PHP_EOL;
-        foreach ($type as $price) {
-            echo '[' . $x++ . '] ' . $price[0] . ' price: €' . $price[1] / 100 . PHP_EOL;
-        }
-        echo '[' . (count($type) + 1) . '] Exit' . PHP_EOL;
-        $inputValue = readline('What coffee do you want: ');
-        if (!checkInput($inputValue, $type)) {
-            print("\033[2J\033[;H");
-            echo PHP_EOL . 'Invalid Input.' . PHP_EOL;
-        }
-    } while (!checkInput($inputValue, $type));
-    if ((count($type) + 1) == $inputValue) {
-        echo 'See you next time, Good day!';
-        exit;
-    } elseif ($type[$inputValue - 1][1] < walletTotal($wallet)) {
-        coinInter($wallet, $type, $inputValue);
-    } else {
-        echo 'You don`t have enough money for: ' . $type[$inputValue - 1][0] . '!';
-    }
-}
-
+//pārbaudu ievadi
 function checkInput(string $inputValue, array $type): bool
 {
     if (strlen($inputValue) > 1 ||
@@ -58,6 +25,7 @@ function checkInput(string $inputValue, array $type): bool
     return true;
 }
 
+//pārbaudu vai monēta eksistē arraya
 function checkCoin(array $wallet, string $inputCoin): bool
 {
     if (array_key_exists($inputCoin, $wallet)) {
@@ -66,6 +34,7 @@ function checkCoin(array $wallet, string $inputCoin): bool
     return false;
 }
 
+// pārbaudu monētas daudzumu
 function checkCoinAmount(array $wallet, string $inputCoin): int
 {
     if (checkCoin($wallet, $inputCoin)) {
@@ -75,19 +44,59 @@ function checkCoinAmount(array $wallet, string $inputCoin): int
     }
 }
 
-function coinInter(array $wallet, array $type, string $inputValue)
+function yourCoins(array $wallet): string
 {
-    $coinSum = 0;
+    $string = '';
+    foreach ($wallet as $coin => $amount) {
+        $string .= '€' . $coin / 100 . '-' . $amount . ' | ';
+    }
+    return 'Your coins: ' . $string;
+}
 
+// izpildu kafijas izvēli
+do {
+    echo yourCoins($wallet);
+
+    echo PHP_EOL . 'Wallet total: €' . walletTotal($wallet) / 100 . PHP_EOL;
+    $counter = 1;
+    foreach ($type as $price) {
+        echo '[' . $counter++ . '] ' . $price[0] . ' price: €' . $price[1] / 100 . PHP_EOL;
+    }
+
+    echo '[' . (count($type) + 1) . '] Exit' . PHP_EOL;
+
+    $inputValue = readline('What coffee do you want: ');
+
+    if (!checkInput($inputValue, $type)) {
+        print("\033[2J\033[;H");
+        echo PHP_EOL . 'Invalid Input.' . PHP_EOL;
+    }
+    echo 'You chose: ' . $type[$inputValue - 1][0] . '. Price: €' . $type[$inputValue - 1][1] / 100 . PHP_EOL;
+} while (!checkInput($inputValue, $type));
+
+
+if ((count($type) + 1) == $inputValue) {
+    echo 'See you next time, Good day!';
+    exit;
+} elseif ($type[$inputValue - 1][1] < walletTotal($wallet)) {
+    $coinSum = 0;
+// ievietoju monētas
     do {
-        coinsLeft($wallet) . PHP_EOL;
         $inputCoin = readline('Input coin(1 = 1 cent, 100 = 1€): ');
+
         if (checkCoin($wallet, $inputCoin)) {
+
             if (checkCoinAmount($wallet, $inputCoin) > 0) {
                 $coinSum += $inputCoin;
-                print("\033[2J\033[;H");
-                echo 'Sum inputted: €' . $coinSum / 100 . PHP_EOL . PHP_EOL;
                 $wallet[$inputCoin] = $wallet[$inputCoin] - 1;
+                print("\033[2J\033[;H");
+                echo yourCoins($wallet) . PHP_EOL;
+
+                if ($type[$inputValue - 1][1] - $coinSum < 0) {
+                    echo 'Inputted: €' . $coinSum / 100 . ". Change: €" . ($type[$inputValue - 1][1] - $coinSum) / 100 * -1 . PHP_EOL;
+                } else {
+                    echo 'Inputted: €' . $coinSum / 100 . ". Left to input: €" . ($type[$inputValue - 1][1] - $coinSum) / 100 . PHP_EOL;
+                }
             } else {
                 echo 'You don`t have €' . $inputCoin / 100 . ' coins anymore.' . PHP_EOL;
             }
@@ -96,12 +105,7 @@ function coinInter(array $wallet, array $type, string $inputValue)
         }
     } while ($coinSum < $type[$inputValue - 1][1]);
     $change = ($coinSum - $type[$inputValue - 1][1]);
-    returnCoins($wallet, $change);
-    echo PHP_EOL . 'You bought: ' . $type[$inputValue - 1][0] . PHP_EOL . 'You have left €' . (walletTotal($wallet) + $change) / 100 . ' in your pocket.';
-}
 
-function returnCoins(array $wallet, int $change)
-{
     while ($change > 0) {
         if ($change >= 100) {
             $wallet['100'] = $wallet['100'] + 1;
@@ -126,7 +130,7 @@ function returnCoins(array $wallet, int $change)
             $change = $change - 1;
         }
     }
-    coinsLeft($wallet);
+    echo PHP_EOL . 'You bought: ' . $type[$inputValue - 1][0] . PHP_EOL . 'You have left €' . (walletTotal($wallet) + $change) / 100 . ' in your pocket.';
+} else {
+    echo 'You don`t have enough money for: ' . $type[$inputValue - 1][0] . '!';
 }
-
-chooseCoffee($wallet, $type);
