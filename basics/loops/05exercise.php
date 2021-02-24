@@ -25,6 +25,6 @@ do {
     } else {
         $sumCopy = $sum;
         $sum += $random;
-        echo 'You rolled a ' . ($sum - $sumCopy) . PHP_EOL . 'sum: ' . $sum . ' copysum: ' . $sumCopy . PHP_EOL;
+        echo 'You rolled a ' . ($sum - $sumCopy) . PHP_EOL . 'sum: ' . $sum . PHP_EOL;
     }
 } while ($input === 'y');

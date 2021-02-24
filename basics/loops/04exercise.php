@@ -23,4 +23,8 @@ function FizzBuzz(int $number): string
 }
 
 $inputNumber = readline('Max value? ');
-echo FizzBuzz($inputNumber);
+if ($inputNumber >= 1 && is_numeric($inputNumber)) {
+    echo FizzBuzz($inputNumber);
+} else {
+    echo 'You must input positive numbers!';
+}
