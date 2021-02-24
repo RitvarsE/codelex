@@ -93,6 +93,7 @@ if ((count($type) + 1) == $inputValue) {
                 echo yourCoins($wallet) . PHP_EOL;
 
                 if ($type[$inputValue - 1][1] - $coinSum < 0) {
+                    print("\033[2J\033[;H");
                     echo 'Inputted: €' . $coinSum / 100 . ". Change: €" . ($type[$inputValue - 1][1] - $coinSum) / 100 * -1 . PHP_EOL;
                 } else {
                     echo 'Inputted: €' . $coinSum / 100 . ". Left to input: €" . ($type[$inputValue - 1][1] - $coinSum) / 100 . PHP_EOL;
@@ -130,6 +131,7 @@ if ((count($type) + 1) == $inputValue) {
             $change = $change - 1;
         }
     }
+    echo yourCoins($wallet) . PHP_EOL;
     echo PHP_EOL . 'You bought: ' . $type[$inputValue - 1][0] . PHP_EOL . 'You have left €' . (walletTotal($wallet) + $change) / 100 . ' in your pocket.';
 } else {
     echo 'You don`t have enough money for: ' . $type[$inputValue - 1][0] . '!';
