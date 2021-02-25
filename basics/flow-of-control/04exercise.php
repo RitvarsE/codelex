@@ -1,15 +1,20 @@
 <?php
 
 $inputMethod = readline('Choose your input method(switch 1/IF 2): ');
+
 if (!is_numeric($inputMethod) || ($inputMethod > 2 || $inputMethod < 1)) {
     echo 'You must input 1 or 2';
 } else {
+
     switch ($inputMethod) {
         case 1:
+
 //switch method
             $dayNumberSwitch = readline('Input day number( 0 - 6 ): ');
+
             if (!is_numeric($dayNumberSwitch) || ($dayNumberSwitch > 6 || $dayNumberSwitch < 0)) {
                 echo 'Not valid day';
+
             } else {
                 switch ($dayNumberSwitch) {
                     case 0:
@@ -37,11 +42,14 @@ if (!is_numeric($inputMethod) || ($inputMethod > 2 || $inputMethod < 1)) {
 
             }
             break;
+
 // if method
         case 2:
             $dayNumberIf = readline('Input day number( 0 - 6 ): ');
+
             if (!is_numeric($dayNumberIf) || ($dayNumberIf > 6 || $dayNumberIf < 0)) {
                 echo 'Not valid day';
+
             } else {
                 if ($dayNumberIf == 0) {
                     echo 'Sunday';

@@ -6,9 +6,13 @@ $string = readline('Input your string: ');
 function PhoneKeyPad(string $string, array $keypad): string
 {
     $line = '';
+
     if (ctype_alpha($string)) {
+
         foreach (str_split($string) as $character) {
+
             foreach ($keypad as $number => $characters) {
+
                 if (strlen(strpbrk($characters, strtoupper($character))) > 0) {
                     $line .= str_repeat($number, (stripos($characters, $character) + 1));
                 }
