@@ -1,17 +1,5 @@
 <?php
 
-/*
-$p1 = new Point(5, 2);
-$p2 = new Point(-3, 6);
-swap_points(p1, p2);
-echo "(" . p1.x . ", " . p1.y . ")";
-echo "(" . p2.x . ", " . p2.y . ")";
-The output produced from the above code should be:
-
-(-3, 6)
-(5, 2)
- */
-
 class Point
 {
     public int $firstPoint;
@@ -25,19 +13,19 @@ class Point
 
     static function swapPoints(object $first, object $second): void
     {
-        $firstArray = [];
-        $secondArray = [];
+        $firstPointArray = [];
+        $secondPointArray = [];
 
-        array_push($firstArray, $first->firstPoint, $first->secondPoint);
-        array_push($secondArray, $second->firstPoint, $second->secondPoint);
+        array_push($firstPointArray, $first->firstPoint, $first->secondPoint);
+        array_push($secondPointArray, $second->firstPoint, $second->secondPoint);
 
-        $replacedFirst = array_replace($firstArray, $secondArray);
-        $replacedSecond = array_replace($secondArray, $firstArray);
+        $replacedFirstPoint = array_replace($firstPointArray, $secondPointArray);
+        $replacedSecondPoint = array_replace($secondPointArray, $firstPointArray);
 
-        $first->firstPoint = $replacedFirst[0];
-        $first->secondPoint = $replacedFirst[1];
-        $second->firstPoint = $replacedSecond[0];
-        $second->secondPoint = $replacedSecond[1];
+        $first->firstPoint = $replacedFirstPoint[0];
+        $first->secondPoint = $replacedFirstPoint[1];
+        $second->firstPoint = $replacedSecondPoint[0];
+        $second->secondPoint = $replacedSecondPoint[1];
     }
 }
 
