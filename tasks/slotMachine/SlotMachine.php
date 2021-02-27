@@ -3,7 +3,7 @@
 class SlotMachine
 {
     public string $name;
-    private array $elements = ['*' => 1, '#' => 2, '$' => 3, '@' => 4, '%' => 5, '!' => 100, '!' => 100, '!' => 100, '!' => 100, '!' => 100];
+    private array $elements = ['*' => 1, '#' => 2, '$' => 3, '@' => 4, '%' => 5, '!' => 100];
     private array $gameBoard = [];
     private int $balance = 0;
     private int $bet = 0;
@@ -36,8 +36,19 @@ class SlotMachine
         $this->bet();
     }
 
+    public function getBet(): int
+    {
+        return $this->bet;
+    }
+
+    public function setBet($addBet)
+    {
+        $this->bet = $addBet;
+    }
+
     public function bet(): void
-    {echo 'Your sum: ' . $this->getBalance() . PHP_EOL;
+    {
+        echo 'Your sum: ' . $this->getBalance() . PHP_EOL;
         do {
             $bet = readline('Choose your bet(Increment 10): ');
             if ($bet <= $this->balance && is_numeric($bet) && $bet % 10 === 0) {
@@ -150,7 +161,7 @@ class SlotMachine
             echo 'Your bet is higher then your sum: ' . $this->balance . PHP_EOL;
             $quitOrChangeBet = readline('Quit or change bet(q or bet)');
             if ($quitOrChangeBet == 'bet') {
-                $this->bet($bet);
+                $this->bet();
             } else {
                 echo 'See you next time. Withdraw: ' . $this->balance;
             }
@@ -160,17 +171,18 @@ class SlotMachine
     public function freeGame(): void
     {
         if ($this->freeGame > 0) {
-            $this->balance += $this->bet;
-            $this->game();
-            $this->balance += $this->bet;
-            $this->game();
-            $this->balance += $this->bet;
-            $this->game();
-            $this->balance += $this->bet;
-            $this->game();
-            $this->balance += $this->bet;
-            $this->game();
             $this->freeGame = 0;
+            $this->balance += $this->bet;
+            $this->game();
+            $this->balance += $this->bet;
+            $this->game();
+            $this->balance += $this->bet;
+            $this->game();
+            $this->balance += $this->bet;
+            $this->game();
+            $this->balance += $this->bet;
+            $this->game();
+            $this->continue();
         }
     }
 
