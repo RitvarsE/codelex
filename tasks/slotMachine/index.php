@@ -13,7 +13,7 @@ do {
     }
 } while (!is_numeric($moneyToPlay));
 $symbols = new SlotMachine('Symbols');
-$symbols->setBalance($moneyToPlay);
+$symbols->startBalance($moneyToPlay);
 echo 'Your sum: ' . $symbols->getBalance() . PHP_EOL;
 
 do {
@@ -38,8 +38,22 @@ while ($symbols->getBalance() >= $symbols->getBet()) {
     echo implode(' ', $symbols->getGameBoard()[2]) . PHP_EOL;
     sleep(1);
     $symbols->checkLine();
-    $symbols->freeGame();
     echo 'Your sum: ' . $symbols->getBalance() . PHP_EOL;
+    if ($symbols->getFreeGame() > 0) {
+        for ($x = 0; $x < 5; $x++) {
+            $symbols->game();
+            $symbols->setBalance();
+            echo implode(' ', $symbols->getGameBoard()[0]) . PHP_EOL;
+            sleep(1);
+            echo implode(' ', $symbols->getGameBoard()[1]) . PHP_EOL;
+            sleep(1);
+            echo implode(' ', $symbols->getGameBoard()[2]) . PHP_EOL;
+            sleep(1);
+            $symbols->setFreeGame();
+            $symbols->checkLine();
+            echo 'Your sum: ' . $symbols->getBalance() . PHP_EOL;
+        }
+    }
     $continue = readline('Continue?(y/n) ');
     if ($continue === 'y') {
         $changeBet = readline('Change bet(y/n). Your bet: ' . $symbols->getBet() . ': ');
@@ -64,8 +78,4 @@ while ($symbols->getBalance() >= $symbols->getBet()) {
     }
 }
 
-
-
-
-
-//Sapratu, ka jātaisa atsevišķi viss, lai šeit ir echo nevis klasēs, bet nepietika laiks, lai ko tādu izdarītu.
+//iespējams freegame nestrādās, ja freegame laikā izmetīs vēlreiz.

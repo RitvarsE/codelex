@@ -14,14 +14,29 @@ class SlotMachine
         $this->name = $name;
     }
 
+    public function getFreeGame(): int
+    {
+        return $this->freeGame;
+    }
+
+    public function setFreeGame(): void
+    {
+        $this->freeGame = 0;
+    }
+
     public function getBalance(): int
     {
         return $this->balance;
     }
 
-    public function setBalance($moneyToPlay): void
+    public function startBalance($moneyToPlay): void
     {
         $this->balance = $moneyToPlay;
+    }
+
+    public function setBalance(): void
+    {
+        $this->balance += $this->bet;
     }
 
     public function getBet(): int
@@ -96,23 +111,6 @@ class SlotMachine
             } else {
                 $this->balance += $this->elements[$this->gameBoard[0][2]] * $this->bet;
             }
-        }
-    }
-
-    public function freeGame(): void
-    {
-        if ($this->freeGame > 0) {
-            $this->freeGame = 0;
-            $this->balance += $this->bet;
-            $this->game();
-            $this->balance += $this->bet;
-            $this->game();
-            $this->balance += $this->bet;
-            $this->game();
-            $this->balance += $this->bet;
-            $this->game();
-            $this->balance += $this->bet;
-            $this->game();
         }
     }
 
