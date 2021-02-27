@@ -19,21 +19,9 @@ class SlotMachine
         return $this->balance;
     }
 
-    public function startGame($moneyToPlay): void
+    public function setBalance($moneyToPlay): void
     {
-        do {
-            if (is_numeric($moneyToPlay)) {
-                if (fmod($moneyToPlay, 1) == 0) {
-                    $moneyToPlay;
-                } else {
-                    $moneyToPlay = '';
-                }
-            } else {
-                $moneyToPlay = '';
-            }
-        } while (!is_numeric($moneyToPlay));
         $this->balance = $moneyToPlay;
-        $this->bet();
     }
 
     public function getBet(): int
@@ -46,32 +34,9 @@ class SlotMachine
         $this->bet = $addBet;
     }
 
-    public function bet(): void
+    public function getGameBoard(): array
     {
-        echo 'Your sum: ' . $this->getBalance() . PHP_EOL;
-        do {
-            $bet = readline('Choose your bet(Increment 10): ');
-            if ($bet <= $this->balance && is_numeric($bet) && $bet % 10 === 0) {
-                if (fmod($bet, 1) == 0) {
-                    $bet;
-                } else {
-                    $bet = '';
-                }
-            } else {
-                $bet = '';
-            }
-        } while (!is_numeric($bet));
-        $this->bet = $bet;
-        $this->game();
-    }
-
-    public function getElements(): string
-    {
-        $line = '';
-        foreach ($this->elements as $element => $coefficient) {
-            $line .= " $element - $coefficient |";
-        }
-        return '|' . $line;
+        return $this->gameBoard;
     }
 
     public function addElements(string $element, int $coefficient): void
@@ -88,16 +53,8 @@ class SlotMachine
         $this->gameBoard = [];
         for ($x = 0; $x < 3; $x++) {
             array_push($this->gameBoard, [array_rand($this->elements), array_rand($this->elements), array_rand($this->elements)]);
-            $echoGameBoard = $this->gameBoard;
-            echo implode(' ', $echoGameBoard[$x]) . PHP_EOL;
-            sleep(1);
         }
         $this->balance -= $this->bet;
-        $this->checkLine();
-        echo 'You have left: ' . $this->balance . PHP_EOL;
-        $this->freeGame();
-        $this->continue();
-
     }
 
     public function checkLine(): void
@@ -142,32 +99,6 @@ class SlotMachine
         }
     }
 
-    public function continue(): void
-    {
-
-        if ($this->balance >= $this->bet) {
-            $continue = readline('Continue?(y/n) ');
-            if ($continue === 'y') {
-                $changeBet = readline('Change bet(y/n). Your bet: ' . $this->bet . ': ');
-                if ($changeBet == 'y') {
-                    $this->bet();
-                } else {
-                    $this->game();
-                }
-            }
-        } elseif ($this->balance == 0) {
-            echo 'You lost all your money!';
-        } else {
-            echo 'Your bet is higher then your sum: ' . $this->balance . PHP_EOL;
-            $quitOrChangeBet = readline('Quit or change bet(q or bet)');
-            if ($quitOrChangeBet == 'bet') {
-                $this->bet();
-            } else {
-                echo 'See you next time. Withdraw: ' . $this->balance;
-            }
-        }
-    }
-
     public function freeGame(): void
     {
         if ($this->freeGame > 0) {
@@ -182,7 +113,6 @@ class SlotMachine
             $this->game();
             $this->balance += $this->bet;
             $this->game();
-            $this->continue();
         }
     }
 
