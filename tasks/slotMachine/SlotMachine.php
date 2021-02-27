@@ -33,11 +33,13 @@ class SlotMachine
             }
         } while (!is_numeric($moneyToPlay));
         $this->balance = $moneyToPlay;
+        $this->bet();
     }
 
-    public function bet(string $bet): void
-    {
+    public function bet(): void
+    {echo 'Your sum: ' . $this->getBalance() . PHP_EOL;
         do {
+            $bet = readline('Choose your bet(Increment 10): ');
             if ($bet <= $this->balance && is_numeric($bet) && $bet % 10 === 0) {
                 if (fmod($bet, 1) == 0) {
                     $bet;
@@ -148,7 +150,7 @@ class SlotMachine
             echo 'Your bet is higher then your sum: ' . $this->balance . PHP_EOL;
             $quitOrChangeBet = readline('Quit or change bet(q or bet)');
             if ($quitOrChangeBet == 'bet') {
-                $this->bet();
+                $this->bet($bet);
             } else {
                 echo 'See you next time. Withdraw: ' . $this->balance;
             }
