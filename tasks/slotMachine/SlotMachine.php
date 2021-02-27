@@ -41,7 +41,7 @@ class SlotMachine
         return $this->bet;
     }
 
-    public function setBet($addBet)
+    public function setBet(string $addBet): void
     {
         $this->bet = $addBet;
     }
