@@ -1,6 +1,7 @@
 <?php
 
-class Cinema{
+class Cinema
+{
     private array $movies;
 
 
@@ -10,6 +11,7 @@ class Cinema{
             $this->addMovies($movie);
         }
     }
+
     public function getMovies(): array
     {
         return $this->movies;
