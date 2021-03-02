@@ -11,6 +11,6 @@ $cinema = new Cinema([
 
 foreach ($cinema->getMovies() as $movie) {
     if ($movie->getRating() === 'PG') {
-        echo 'Movie: "'. $movie->getTitle() . '" Studio: ' . $movie->getStudio() . ' Rating: ' . $movie->getRating() . PHP_EOL;
+        echo 'Movie: "' . $movie->getTitle() . '" Studio: ' . $movie->getStudio() . ' Rating: ' . $movie->getRating() . PHP_EOL;
     }
 }

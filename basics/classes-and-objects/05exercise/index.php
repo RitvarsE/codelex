@@ -2,7 +2,7 @@
 
 require_once "Date.php";
 
-$birthday = new Date(15,9,1991); // 15 nav robežās, ja tālāk netaisīšu setMonth, tad būs errors.
+$birthday = new Date(15, 9, 1991); // 15 nav robežās, ja tālāk netaisīšu setMonth, tad būs errors.
 
 $birthday->setDay(50); // nenostrādās, jo nav robežās
 $birthday->setDay(15); // nostrādā
