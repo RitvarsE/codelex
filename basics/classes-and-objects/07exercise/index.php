@@ -29,11 +29,11 @@ $dogSchool->addFather('Rocky', 'Sam');
 $dogSchool->addFather('Buster', 'Sparky');
 
 //print out all dog information
-foreach($dogSchool->getDogs() as $dog){
+foreach ($dogSchool->getDogs() as $dog) {
     echo 'Dog: ' . $dog->getName();
     echo ' | Sex: ' . $dog->getSex();
     echo ' | Mother: ' . $dog->getMother();
     echo ' | Father: ' . $dog->getFather() . PHP_EOL;
 }
 // check if dogs have same mother.
-echo $dogSchool->HasSameMotherAs('Rocky','Coco') ? 'true' : 'false';
+echo $dogSchool->HasSameMotherAs('Rocky', 'Coco') ? 'true' : 'false';

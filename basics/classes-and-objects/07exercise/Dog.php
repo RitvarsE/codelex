@@ -27,14 +27,12 @@ class Dog
 
     public function getMother(): string
     {
-        if ($this->mother === null) return 'unknown';
-        return $this->mother;
+        return $this->mother ?? 'unknown';
     }
 
     public function getFather(): string
     {
-        if ($this->father === null) return 'unknown';
-        return $this->father;
+        return $this->father ?? 'unknown';
     }
 
     public function setMother(string $mother): void
