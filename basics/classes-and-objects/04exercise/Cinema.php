@@ -22,5 +22,12 @@ class Cinema
         $this->movies[] = $movie;
     }
 
+    public function getPG(array $movies): array
+    {
+        return array_filter($movies, static function (Movie $movie) {
+            return $movie->getRating() === 'PG';
+        });
+    }
+
 
 }

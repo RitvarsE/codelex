@@ -9,8 +9,7 @@ $cinema = new Cinema([
     new Movie('Spider-Man: Into the Spider-Verse', 'Columbia Pictures', 'PG'),
 ]);
 
-foreach ($cinema->getMovies() as $movie) {
-    if ($movie->getRating() === 'PG') {
-        echo 'Movie: "' . $movie->getTitle() . '" Studio: ' . $movie->getStudio() . ' Rating: ' . $movie->getRating() . PHP_EOL;
-    }
+//pielietoju getterus :D
+foreach ($cinema->getPG($cinema->getMovies()) as $movie) {
+    echo $movie->getTitle() . ' ' . $movie->getStudio() . ' ' . $movie->getRating() . PHP_EOL;
 }
