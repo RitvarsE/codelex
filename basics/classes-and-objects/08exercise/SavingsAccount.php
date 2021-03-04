@@ -39,8 +39,8 @@ class SavingsAccount
 
     public function addMonthlyInterest(): void
     {
-        $this->interestEarned += $this->balance * $this->getAnnualInterestRate() / 12;
-        $this->balance += $this->balance * $this->getAnnualInterestRate() / 12;
+        $this->interestEarned += $this->balance * $this->getAnnualInterestRate() / 12 * 0.01;
+        $this->balance += $this->balance * $this->getAnnualInterestRate() / 12 * 0.01;
     }
 
     public function getDeposited(): float
@@ -56,6 +56,11 @@ class SavingsAccount
     public function getInterestEarned(): float
     {
         return $this->interestEarned;
+    }
+
+    public function format($num): float
+    {
+        return number_format($num, 2);
     }
 
 }

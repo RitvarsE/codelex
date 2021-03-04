@@ -26,12 +26,12 @@ $month = 1;
 do {
     do {
         $deposit = readline("Enter amount deposited for month: $month: ");
-    } while ($deposit <= 0 || !is_numeric($deposit));
+    } while ($deposit < 0 || !is_numeric($deposit));
     $myAccount->deposit($deposit);
 
     do {
         $withdraw = readline("Enter amount withdrawn for month: $month: ");
-    } while ($withdraw <= 0 || !is_numeric($withdraw));
+    } while ($withdraw < 0 || !is_numeric($withdraw));
     $myAccount->withdraw($withdraw);
 
     $myAccount->addMonthlyInterest();
@@ -40,7 +40,7 @@ do {
 } while ($months !== 0);
 
 //echo out information
-echo 'Total deposited: $' . number_format($myAccount->getDeposited(), 2) . PHP_EOL;
-echo 'Total withdrawn: $' . number_format($myAccount->getWithdrawn(), 2) . PHP_EOL;
-echo 'Interest earned: $' . number_format($myAccount->getInterestEarned(), 2) . PHP_EOL;
-echo 'Ending balance: $' . number_format($myAccount->getBalance(), 2) . PHP_EOL;
+echo 'Total deposited: $' . $myAccount->format($myAccount->getDeposited()) . PHP_EOL;
+echo 'Total withdrawn: $' . $myAccount->format($myAccount->getWithdrawn()) . PHP_EOL;
+echo 'Interest earned: $' . $myAccount->format($myAccount->getInterestEarned()) . PHP_EOL;
+echo 'Ending balance: $' . $myAccount->format($myAccount->getBalance()) . PHP_EOL;
