@@ -25,20 +25,14 @@ class Dog
         return $this->sex;
     }
 
-    public function getMother(): string
+    public function getMother(): ?Dog
     {
-        if ($this->mother === null) {
-            return 'unknown';
-        }
-        return $this->mother->getName();
+        return $this->mother;
     }
 
-    public function getFather(): string
+    public function getFather(): ?Dog
     {
-        if ($this->father === null) {
-            return 'unknown';
-        }
-        return $this->father->getName();
+        return $this->father;
     }
 
 
@@ -54,7 +48,7 @@ class Dog
 
     public function HasSameMotherAs(Dog $name): bool
     {
-        return !($this->getMother() === 'unknown' || $name->getMother() === 'unknown' || $this->getMother() !== $name->getMother());
+        return !($this->getMother() === null || $name->getMother() === null || $this->getMother() !== $name->getMother());
     }
 
 }

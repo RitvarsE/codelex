@@ -29,11 +29,13 @@ $rocky->setFather($sam);
 $buster->setFather($sparky);
 
 //print out all dog information
+
 foreach ($dogSchool->getDogs() as $dog) {
     echo 'Dog: ' . $dog->getName();
     echo ' | Sex: ' . $dog->getSex();
-    echo ' | Mother: ' . $dog->getMother();
-    echo ' | Father: ' . $dog->getFather() . PHP_EOL;
+    echo $dog->getMother() === null ? ' | Mother: unknown' : ' | Mother: ' . $dog->getMother()->getName();
+    echo $dog->getFather() === null ? ' | Father: unknown' . PHP_EOL : ' | Father: ' . $dog->getFather()->getName() . PHP_EOL;
+
 }
 
 // check if dogs have same mother.

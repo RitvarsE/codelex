@@ -17,25 +17,6 @@ class Dogs
         return $this->dogs;
     }
 
-    public function addMother(string $dogName, string $mother): void
-    {
-        foreach ($this->getDogs() as $dog) {
-            if ($dog->getName() === $dogName) {
-                $dog->setMother($mother);
-            }
-        }
-    }
-
-    public function addFather(string $dogName, string $father): void
-    {
-        foreach ($this->getDogs() as $dog) {
-            if ($dog->getName() === $dogName) {
-                $dog->setFather($father);
-            }
-        }
-    }
-
-
     private function addDog(Dog $dog): void
     {
         $this->dogs[] = $dog;
