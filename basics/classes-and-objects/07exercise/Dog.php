@@ -5,8 +5,8 @@ class Dog
 {
     private string $name;
     private string $sex;
-    private ?string $mother = null;
-    private ?string $father = null;
+    private ?Dog $mother = null;
+    private ?Dog $father = null;
 
     public function __construct(string $name, string $sex)
     {
@@ -27,23 +27,34 @@ class Dog
 
     public function getMother(): string
     {
-        return $this->mother ?? 'unknown';
+        if ($this->mother === null) {
+            return 'unknown';
+        }
+        return $this->mother->getName();
     }
 
     public function getFather(): string
     {
-        return $this->father ?? 'unknown';
+        if ($this->father === null) {
+            return 'unknown';
+        }
+        return $this->father->getName();
     }
 
-    public function setMother(string $mother): void
+
+    public function setMother(Dog $mother): void
     {
         $this->mother = $mother;
     }
 
-    public function setFather(string $father): void
+    public function setFather(Dog $father): void
     {
         $this->father = $father;
     }
 
+    public function HasSameMotherAs(Dog $name): bool
+    {
+        return !($this->getMother() === 'unknown' || $name->getMother() === 'unknown' || $this->getMother() !== $name->getMother());
+    }
 
 }

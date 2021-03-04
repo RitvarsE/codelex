@@ -35,19 +35,6 @@ class Dogs
         }
     }
 
-    public function HasSameMotherAs(string $firstDogName, string $secondDogName): bool
-    {
-        $dogMother = [];
-        foreach ($this->getDogs() as $dog) {
-            if ($dog->getName() === $firstDogName && $dog->getMother() !== null) {
-                $dogMother[] = $dog->getMother();
-            }
-            if ($dog->getName() === $secondDogName && $dog->getMother() !== null) {
-                $dogMother[] = $dog->getMother();
-            }
-        }
-        return count($dogMother) === 2 && count(array_unique($dogMother)) === 1;
-    }
 
     private function addDog(Dog $dog): void
     {

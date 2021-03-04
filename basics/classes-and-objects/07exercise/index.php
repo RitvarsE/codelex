@@ -6,27 +6,27 @@ require_once 'Dogs.php';
 //adding dogs
 
 $dogSchool = new Dogs([
-    new Dog('Max', 'male'),
-    new Dog('Rocky', 'male'),
-    new Dog('Sparky', 'male'),
-    new Dog('Buster', 'male'),
-    new Dog('Sam', 'male'),
-    new Dog('Lady', 'female'),
-    new Dog('Molly', 'female'),
-    new Dog('Coco', 'female'),
+    $max = new Dog('Max', 'male'),
+    $rocky = new Dog('Rocky', 'male'),
+    $sparky = new Dog('Sparky', 'male'),
+    $buster = new Dog('Buster', 'male'),
+    $sam = new Dog('Sam', 'male'),
+    $lady = new Dog('Lady', 'female'),
+    $molly = new Dog('Molly', 'female'),
+    $coco = new Dog('Coco', 'female'),
 ]);
 
 //adding mothers
-$dogSchool->addMother('Max', 'Lady');
-$dogSchool->addMother('Coco', 'Molly');
-$dogSchool->addMother('Rocky', 'Molly');
-$dogSchool->addMother('Buster', 'Lady');
+$max->setMother($lady);
+$coco->setMother($molly);
+$rocky->SetMother($molly);
+$buster->setMother($lady);
 
 //adding fathers
-$dogSchool->addFather('Max', 'Rocky');
-$dogSchool->addFather('Coco', 'Buster');
-$dogSchool->addFather('Rocky', 'Sam');
-$dogSchool->addFather('Buster', 'Sparky');
+$max->setFather($rocky);
+$coco->setFather($buster);
+$rocky->setFather($sam);
+$buster->setFather($sparky);
 
 //print out all dog information
 foreach ($dogSchool->getDogs() as $dog) {
@@ -35,5 +35,6 @@ foreach ($dogSchool->getDogs() as $dog) {
     echo ' | Mother: ' . $dog->getMother();
     echo ' | Father: ' . $dog->getFather() . PHP_EOL;
 }
+
 // check if dogs have same mother.
-echo $dogSchool->HasSameMotherAs('Rocky', 'Coco') ? 'true' : 'false';
+echo $max->HasSameMotherAs($buster) ? 'true' : 'false';
