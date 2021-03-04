@@ -34,14 +34,8 @@ $A = new Account('A account', 100.0);
 $B = new Account('B account', 0.0);
 $C = new Account('C account', 0.0);
 
-function transfer(Account $from, Account $to, int $howMuch): void
-{
-    $from->withdrawal($howMuch);
-    $to->deposit($howMuch);
-}
-
-transfer($A, $B, 50);
-transfer($B, $C, 25);
+$A->transfer($B, 50);
+$B->transfer($C, 25);
 
 echo PHP_EOL;
 echo $A->getName() . ' ' . number_format($A->getBalance(), 2) . PHP_EOL;

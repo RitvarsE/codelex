@@ -4,9 +4,9 @@
 class Account
 {
     private string $name;
-    private float $balance;
+    private int $balance;
 
-    public function __construct(string $name, float $balance)
+    public function __construct(string $name, int $balance)
     {
         $this->name = $name;
         $this->balance = $balance;
@@ -19,20 +19,24 @@ class Account
     }
 
 
-    public function getBalance(): float
+    public function getBalance(): int
     {
         return $this->balance;
     }
 
-    public function withdrawal(float $amount): void
+    public function withdrawal(int $amount): void
     {
         $this->balance -= $amount;
     }
 
-    public function deposit(float $amount): void
+    public function deposit(int $amount): void
     {
         $this->balance += $amount;
     }
-
+    public function transfer(Account $to, int $howMuch): void
+    {
+        $this->withdrawal($howMuch);
+        $to->deposit($howMuch);
+    }
 
 }
