@@ -8,9 +8,6 @@ class Date
 
     public function __construct(int $month, int $day, int $year)
     {
-        if ($month > 12 || $month < 1 || $day > 31 || $day < 1 || $year < 0) {
-            return;
-        }
         $this->month = $month;
         $this->day = $day;
         $this->year = $year;
@@ -22,28 +19,9 @@ class Date
         return $this->month;
     }
 
-
-    public function setMonth(int $month): void
-    {
-        if ($month > 12 || $month < 1) {
-            return;
-        }
-        $this->month = $month;
-    }
-
-
     public function getDay(): int
     {
         return $this->day;
-    }
-
-
-    public function setDay(int $day): void
-    {
-        if ($day > 31 || $day < 1) {
-            return;
-        }
-        $this->day = $day;
     }
 
 
@@ -53,12 +31,14 @@ class Date
     }
 
 
-    public function setYear(int $year): void
+    public function setDate(int $month, int $day, int $year): void
     {
-        if ($year < 0) {
+        if (!checkdate($month, $day, $year)) {
             return;
         }
         $this->year = $year;
+        $this->month = $month;
+        $this->day = $day;
     }
 
 }
