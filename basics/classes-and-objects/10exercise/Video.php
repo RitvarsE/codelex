@@ -41,6 +41,6 @@ class Video
     }
     public function setRating(int $rating): void
     {
-        $this->avgUserRating = round(($this->getAvgUserRating() + $rating) / 2);
+        $this->avgUserRating = $rating;
     }
 }

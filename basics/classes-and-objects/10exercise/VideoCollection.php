@@ -5,7 +5,7 @@ class VideoCollection
 {
     private array $videos = [];
 
-    public function addVideos(Video $video): void
+    public function addVideo(Video $video): void
     {
         $this->videos[] = $video;
     }
@@ -25,12 +25,11 @@ class VideoCollection
     }
 
 
-    public function returnVideo(string $title, int $rating): void
+    public function returnVideo(string $title): void
     {
         foreach ($this->allVideos() as $video) {
             if ($video->getTitle() === $title && $video->isRented() === true) {
                 $video->return();
-                $video->setRating($rating);
             }
         }
     }
@@ -46,4 +45,13 @@ class VideoCollection
         return $listInventory;
     }
 
+    public function setRating(string $title, int $rating): void
+    {
+        foreach ($this->allVideos() as $video) {
+            if ($video->getTitle() === $title) {
+                $averageRating = round(($video->getAvgUserRating() + $rating) / 2);
+                $video->setRating($averageRating);
+            }
+        }
+    }
 }
