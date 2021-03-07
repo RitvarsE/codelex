@@ -7,9 +7,9 @@ class Application
     public function __construct()
     {
         $this->videoCollection = new VideoCollection();
-        $this->videoCollection->addVideo(new Video('The Matrix', 89));
-        $this->videoCollection->addVideo(new Video('Godfather II', 80));
-        $this->videoCollection->addVideo(new Video('Star Wars Episode IV: A New Hope', 40));
+        $this->videoCollection->addVideo(new Video('The Matrix', [50, 20, 70, 90]));
+        $this->videoCollection->addVideo(new Video('Godfather II', [60, 90, 80, 50]));
+        $this->videoCollection->addVideo(new Video('Star Wars Episode IV: A New Hope', [100, 25, 95]));
     }
 
     public function run(): void

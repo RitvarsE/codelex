@@ -5,13 +5,14 @@ class Video
 {
     private string $title;
     private bool $rented;
-    private int $avgUserRating;
+    private array $rating;
+    private int $avgRating;
 
-    public function __construct(string $title, int $avgUserRating = 50, bool $rented = false)
+    public function __construct(string $title, array $rating = [50], bool $rented = false)
     {
         $this->title = $title;
         $this->rented = $rented;
-        $this->avgUserRating = $avgUserRating;
+        $this->rating = $rating;
     }
 
     public function getTitle(): string
@@ -25,9 +26,9 @@ class Video
     }
 
 
-    public function getAvgUserRating(): int
+    public function getRating(): array
     {
-        return $this->avgUserRating;
+        return $this->rating;
     }
 
     public function rent(): void
@@ -39,8 +40,13 @@ class Video
     {
         $this->rented = false;
     }
+
+    public function avgRating(): int
+    {
+        return round(array_sum($this->getRating()) / count($this->getRating()));
+    }
     public function setRating(int $rating): void
     {
-        $this->avgUserRating = $rating;
+        $this->rating[] = $rating;
     }
 }

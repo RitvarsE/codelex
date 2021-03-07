@@ -39,7 +39,7 @@ class VideoCollection
         $listInventory = '';
         foreach ($this->allVideos() as $video) {
             $listInventory .= 'Title: ' . $video->getTitle() .
-                ' | Rating: ' . $video->getAvgUserRating() .
+                ' | Rating: ' . $video->avgRating() .
                 ' | Rented: ' . ($video->isRented() ? 'yes' : 'no') . PHP_EOL;
         }
         return $listInventory;
@@ -49,8 +49,7 @@ class VideoCollection
     {
         foreach ($this->allVideos() as $video) {
             if ($video->getTitle() === $title) {
-                $averageRating = round(($video->getAvgUserRating() + $rating) / 2);
-                $video->setRating($averageRating);
+                $video->setRating($rating);
             }
         }
     }
