@@ -2,7 +2,17 @@
 
 class Application
 {
-    public function run():void
+    private VideoCollection $videoCollection;
+
+    public function __construct()
+    {
+        $this->videoCollection = new VideoCollection();
+        $this->videoCollection->addVideos(new Video('The Matrix', 89));
+        $this->videoCollection->addVideos(new Video('Godfather II', 80));
+        $this->videoCollection->addVideos(new Video('Star Wars Episode IV: A New Hope', 40));
+    }
+
+    public function run(): void
     {
         while (true) {
             echo "Choose the operation you want to perform \n";
@@ -18,18 +28,29 @@ class Application
                 case 0:
                     echo "Bye!";
                     die;
+
                 case 1:
-                    $movie = readline('Enter the name: ');
-                    VideoStore::addMovies($movie);
+                    $title = new Video(readline('Input movie name: '));
+                    $this->videoCollection->addVideos($title);
                     break;
+
                 case 2:
-                    $this->rentVideo();
+                    echo $this->videoCollection->listInventory();
+                    $title = readline('Input movie name: ');
+                    $this->videoCollection->rentVideo($title);
                     break;
+
                 case 3:
-                    $this->returnVideo();
+                    echo $this->videoCollection->listInventory();
+                    $title = readline('Input movie name: ');
+                    do {
+                        $rating = readline('How will you rate the movie?(0-100) ');
+                    } while ($rating < 0 || $rating > 100 || !is_numeric($rating));
+                    $this->videoCollection->returnVideo($title, (int)$rating);
                     break;
+
                 case 4:
-                    $this->listInventory();
+                    echo $this->videoCollection->listInventory();
                     break;
                 default:
                     echo "Sorry, I don't understand you..";
@@ -37,19 +58,4 @@ class Application
         }
     }
 
-    private function rentVideo():void
-    {
-        //todo
-    }
-
-    private function returnVideo():void
-    {
-        //todo
-    }
-
-    private function listInventory():void
-    {
-        //todo
-    }
 }
-

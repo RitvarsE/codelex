@@ -4,14 +4,13 @@
 class Video
 {
     private string $title;
-    private bool $flag;
+    private bool $rented;
     private int $avgUserRating;
 
-
-    public function __construct(string $title, bool $flag, int $avgUserRating)
+    public function __construct(string $title, int $avgUserRating = 50, bool $rented = false)
     {
         $this->title = $title;
-        $this->flag = $flag;
+        $this->rented = $rented;
         $this->avgUserRating = $avgUserRating;
     }
 
@@ -20,14 +19,28 @@ class Video
         return $this->title;
     }
 
-    public function isFlag(): bool
+    public function isRented(): bool
     {
-        return $this->flag;
+        return $this->rented;
     }
 
 
     public function getAvgUserRating(): int
     {
         return $this->avgUserRating;
+    }
+
+    public function rent(): void
+    {
+        $this->rented = true;
+    }
+
+    public function return(): void
+    {
+        $this->rented = false;
+    }
+    public function setRating(int $rating): void
+    {
+        $this->avgUserRating = round(($this->getAvgUserRating() + $rating) / 2);
     }
 }

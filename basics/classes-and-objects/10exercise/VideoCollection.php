@@ -1,17 +1,49 @@
 <?php
 
 
-class VideoStore extends Application
+class VideoCollection
 {
-    private array $movies = [];
+    private array $videos = [];
 
-    public function addMovies(Video $movie): void
+    public function addVideos(Video $video): void
     {
-        $this->movies[] = $movie;
+        $this->videos[] = $video;
     }
 
-    public function allMovies(): array
+    public function allVideos(): array
     {
-        return $this->movies;
+        return $this->videos;
     }
+
+    public function rentVideo(string $title): void
+    {
+        foreach ($this->allVideos() as $video) {
+            if ($video->getTitle() === $title && $video->isRented() === false) {
+                $video->rent();
+            }
+        }
+    }
+
+
+    public function returnVideo(string $title, int $rating): void
+    {
+        foreach ($this->allVideos() as $video) {
+            if ($video->getTitle() === $title && $video->isRented() === true) {
+                $video->return();
+                $video->setRating($rating);
+            }
+        }
+    }
+
+    public function listInventory(): string
+    {
+        $listInventory = '';
+        foreach ($this->allVideos() as $video) {
+            $listInventory .= 'Title: ' . $video->getTitle() .
+                ' | Rating: ' . $video->getAvgUserRating() .
+                ' | Rented: ' . ($video->isRented() ? 'yes' : 'no') . PHP_EOL;
+        }
+        return $listInventory;
+    }
+
 }
