@@ -1,7 +1,7 @@
 <?php
 
 
-class Vegetables extends Fresh
+class Ingredient
 {
     private string $name;
 
@@ -13,9 +13,5 @@ class Vegetables extends Fresh
     public function getName(): string
     {
         return $this->name;
-    }
-    public function setFreshness(bool $freshOrNo): void
-    {
-        $this->isFresh = $freshOrNo;
     }
 }
