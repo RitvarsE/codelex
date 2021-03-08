@@ -14,6 +14,8 @@ require_once 'Warehouse1.php';
 require_once 'Warehouse2.php';
 require_once 'Warehouse3.php';
 require_once 'flowerShop.php';
+require_once 'flower.php';
+require_once 'flowerCollection.php';
 
 $warehouse1 = new Warehouse1(['tulip' => 20, 'rose' => 30]);
 $warehouse2 = new Warehouse2(['lily' => 5, 'orchid' => 15]);
