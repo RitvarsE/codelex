@@ -22,3 +22,4 @@ $warehouse2 = new Warehouse2(['lily' => 5, 'orchid' => 15]);
 $warehouse3 = new Warehouse3(['carnation' => 50, 'hyacinth' => 3]);
 
 $flowerShop = new flowerShop();
+print_r($warehouse1);
