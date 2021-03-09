@@ -10,6 +10,7 @@ class Application
         $this->videoCollection->addVideo(new Video('The Matrix', [50, 20, 70, 90]));
         $this->videoCollection->addVideo(new Video('Godfather II', [60, 90, 80, 50]));
         $this->videoCollection->addVideo(new Video('Star Wars Episode IV: A New Hope', [100, 25, 95]));
+
     }
 
     public function run(): void
@@ -36,7 +37,6 @@ class Application
                     break;
 
                 case 2:
-                    echo $this->videoCollection->listInventory();
                     $title = readline('Input movie name: ');
                     do {
                         $rating = readline('How will you rate the movie?(0-100) ');
@@ -45,19 +45,21 @@ class Application
                     break;
 
                 case 3:
-                    echo $this->videoCollection->listInventory();
                     $title = readline('Input movie name: ');
                     $this->videoCollection->rentVideo($title);
                     break;
 
                 case 4:
-                    echo $this->videoCollection->listInventory();
                     $title = readline('Input movie name: ');
                     $this->videoCollection->returnVideo($title);
                     break;
 
                 case 5:
-                    echo $this->videoCollection->listInventory();
+                    foreach ($this->videoCollection->allVideos() as $video) {
+                        echo 'Title: ' . $video->getTitle() .
+                            ' | Rating: ' . $video->avgRating() .
+                            ' | Rented: ' . ($video->isRented() ? 'yes' : 'no') . PHP_EOL;
+                    }
                     break;
                 default:
                     echo "Sorry, I don't understand you..";

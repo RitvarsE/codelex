@@ -34,16 +34,6 @@ class VideoCollection
         }
     }
 
-    public function listInventory(): string
-    {
-        $listInventory = '';
-        foreach ($this->allVideos() as $video) {
-            $listInventory .= 'Title: ' . $video->getTitle() .
-                ' | Rating: ' . $video->avgRating() .
-                ' | Rented: ' . ($video->isRented() ? 'yes' : 'no') . PHP_EOL;
-        }
-        return $listInventory;
-    }
 
     public function setRating(string $title, int $rating): void
     {

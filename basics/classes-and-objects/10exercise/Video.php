@@ -6,7 +6,6 @@ class Video
     private string $title;
     private bool $rented;
     private array $rating;
-    private int $avgRating;
 
     public function __construct(string $title, array $rating = [50], bool $rented = false)
     {
@@ -45,6 +44,7 @@ class Video
     {
         return round(array_sum($this->getRating()) / count($this->getRating()));
     }
+
     public function setRating(int $rating): void
     {
         $this->rating[] = $rating;
