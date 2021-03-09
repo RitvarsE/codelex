@@ -20,6 +20,7 @@ class flowerShop
         return $this->name;
     }
 
+    //izveidoju sarakstu ar visām puķēm, kuras ir noliktavās un ir vairāk par 0
     public function AllFlowers(): array
     {
         $getAllFlowersFromStock = [];
@@ -33,6 +34,7 @@ class flowerShop
         return $getAllFlowersFromStock;
     }
 
+//izveidoju sarakstu ar puķēm, kuras ir veikalā un ir pieejamas noliktavā
     public function getAvailableFlowers(flowerCollection $flowerCollection): array
     {
         $availableFlowers = [];
@@ -45,11 +47,11 @@ class flowerShop
     }
 
     // saņemu, kurā warehouse ir puķe.
-    public function getWareHouse(string $flower, int $amount): ?Warehouses
+    public function getWareHouse(string $flower): ?Warehouses
     {
         foreach ($this->getWarehouses() as $warehouse) {
             foreach ($warehouse->getFlowerCollection()->getFlowers() as $flowers) {
-                if ($flowers->getName() === $flower && $flowers->getQuantity() >= $amount) {
+                if ($flowers->getName() === $flower) {
                     return $warehouse;
                 }
             }
@@ -57,6 +59,7 @@ class flowerShop
         return null;
     }
 
+    //izpildu piegādi
     public function deliveryWarehouse(Warehouses $warehouse, string $flower, int $amount): void
     {
         $warehouse->deliver($flower, $amount);

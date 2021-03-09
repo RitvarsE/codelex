@@ -21,12 +21,4 @@ class flowerCollection
         return $this->flowers;
     }
 
-    public function AllFlowers(): array
-    {
-        $allFlowers = [];
-        foreach ($this->flowers as $flower) {
-            $allFlowers[] = $flower->getName();
-        }
-        return $allFlowers;
-    }
 }
