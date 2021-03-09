@@ -1,6 +1,6 @@
 <?php
 
-class Flower
+class flower
 {
     private string $name;
     private int $price;
@@ -12,4 +12,20 @@ class Flower
         $this->price = $price;
         $this->quantity = $quantity;
     }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getPrice(): int
+    {
+        return $this->price;
+    }
+
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
 }

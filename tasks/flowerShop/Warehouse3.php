@@ -3,15 +3,21 @@
 
 class Warehouse3 implements Warehouses
 {
-    public array $flowers;
+    private array $flowers;
 
-    public function __construct(array $flowers)
+    public function deliver(): void
     {
-        $this->flowers = $flowers;
+        var_dump(15);
     }
 
-    public function flowers(): array
+    public function addFlower(flower $flower): void
     {
-        return $this->flowers;
+        $this->flowers[] = $flower;
     }
+
+    public function getFlowerCollection(): flowerCollection
+    {
+        return new flowerCollection($this->flowers);
+    }
+
 }

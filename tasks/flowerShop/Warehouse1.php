@@ -1,21 +1,23 @@
 <?php
 
 
-class Warehouse1 implements Warehouses, Discount
+class Warehouse1 implements Warehouses
 {
-    public array $flowers;
+    private array $flowers;
 
-    public function __construct(array $flowers)
+    public function deliver(): void
     {
-        $this->flowers = $flowers;
+        var_dump(15);
     }
 
-    public function flowers(): array
+    public function addFlower(flower $flower): void
     {
-        return $this->flowers;
+        $this->flowers[] = $flower;
     }
-    public function whatSex(): bool
+
+    public function getFlowerCollection(): flowerCollection
     {
-        // TODO: Implement whatSex() method.
+        return new flowerCollection($this->flowers);
     }
+
 }

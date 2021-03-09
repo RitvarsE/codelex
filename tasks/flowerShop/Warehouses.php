@@ -2,5 +2,5 @@
 
 interface Warehouses
 {
-public function flowers():array;
+    public function deliver(): void;
 }
