@@ -16,9 +16,13 @@ class Warehouse3 implements Warehouses
         return $this->name;
     }
 
-    public function deliver(): void
+    public function deliver(string $flowerName, int $amount): void
     {
-        var_dump(15);
+        foreach ($this->getFlowerCollection()->getFlowers() as $flower) {
+            if ($flower->getName() === $flowerName) {
+                $flower->setQuantity($amount);
+            }
+        }
     }
 
     public function addFlower(flower $flower): void

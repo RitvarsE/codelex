@@ -28,4 +28,9 @@ class flower
         return $this->quantity;
     }
 
+    public function setQuantity(int $amount): void
+    {
+        $this->quantity -= $amount;
+    }
+
 }

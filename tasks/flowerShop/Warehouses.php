@@ -2,5 +2,5 @@
 
 interface Warehouses
 {
-    public function deliver(): void;
+    public function deliver(string $flowerName, int $amount): void;
 }

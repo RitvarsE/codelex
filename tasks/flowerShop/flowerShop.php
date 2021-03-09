@@ -20,11 +20,6 @@ class flowerShop
         return $this->name;
     }
 
-    public function addWarehouse(Warehouses $warehouse): void
-    {
-        $this->warehouseList[] = $warehouse;
-    }
-
     public function AllFlowers(): array
     {
         $getAllFlowersFromStock = [];
@@ -38,15 +33,39 @@ class flowerShop
         return $getAllFlowersFromStock;
     }
 
-    public function getWareHouse(string $flower): Warehouses
+    public function getAvailableFlowers(flowerCollection $flowerCollection): array
+    {
+        $availableFlowers = [];
+        foreach ($flowerCollection->getFlowers() as $flowers) {
+            if (in_array($flowers->getName(), $this->AllFlowers(), true)) {
+                $availableFlowers[] = $flowers->getName();
+            }
+        }
+        return $availableFlowers;
+    }
+
+    // saņemu, kurā warehouse ir puķe.
+    public function getWareHouse(string $flower, int $amount): ?Warehouses
     {
         foreach ($this->getWarehouses() as $warehouse) {
             foreach ($warehouse->getFlowerCollection()->getFlowers() as $flowers) {
-                if ($flowers->getName() === $flower) {
+                if ($flowers->getName() === $flower && $flowers->getQuantity() >= $amount) {
                     return $warehouse;
                 }
             }
         }
+        return null;
     }
+
+    public function deliveryWarehouse(Warehouses $warehouse, string $flower, int $amount): void
+    {
+        $warehouse->deliver($flower, $amount);
+    }
+
+    public function addWarehouse(Warehouses $warehouse): void
+    {
+        $this->warehouseList[] = $warehouse;
+    }
+
 
 }
