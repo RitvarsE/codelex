@@ -38,4 +38,15 @@ class flowerShop
         return $getAllFlowersFromStock;
     }
 
+    public function getWareHouse(string $flower): Warehouses
+    {
+        foreach ($this->getWarehouses() as $warehouse) {
+            foreach ($warehouse->getFlowerCollection()->getFlowers() as $flowers) {
+                if ($flowers->getName() === $flower) {
+                    return $warehouse;
+                }
+            }
+        }
+    }
+
 }

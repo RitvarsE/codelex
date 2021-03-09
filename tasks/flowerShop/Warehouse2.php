@@ -4,6 +4,17 @@
 class Warehouse2 implements Warehouses
 {
     private array $flowers;
+    private string $name;
+
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
 
     public function deliver(): void
     {

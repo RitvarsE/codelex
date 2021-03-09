@@ -18,9 +18,9 @@ require_once 'flowerCollection.php';
 
 $flowerShop = new flowerShop('Only Best Flowers');
 
-$flowerShop->addWarehouse($wareHouse1 = new Warehouse1());
-$flowerShop->addWarehouse($wareHouse2 = new Warehouse2());
-$flowerShop->addWarehouse($wareHouse3 = new Warehouse3());
+$flowerShop->addWarehouse($wareHouse1 = new Warehouse1('WareHouse1'));
+$flowerShop->addWarehouse($wareHouse2 = new Warehouse2('WareHouse2'));
+$flowerShop->addWarehouse($wareHouse3 = new Warehouse3('WareHouse3'));
 
 
 $flowersInShop = new flowerCollection([
@@ -39,4 +39,10 @@ $wareHouse2->addFlower(new flower('lily', 0, 30));
 $wareHouse3->addFlower(new flower('peony', 0, 10));
 $wareHouse3->addFlower(new flower('daisy', 0, 40));
 
-var_dump($flowerShop->AllFlowers());
+foreach ($flowersInShop->getFlowers() as $flowers) {
+    if (in_array($flowers->getName(), $flowerShop->AllFlowers(), true)) {
+        echo $flowers->getName() . ' ' . $flowers->getPrice() . PHP_EOL;
+    }
+}
+
+var_dump($flowerShop->getWareHouse('rose')->getName());
