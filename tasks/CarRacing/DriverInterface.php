@@ -1,6 +1,6 @@
 <?php
 
-interface CarInterface
+interface DriverInterface
 {
     public function drive(): int;
 }

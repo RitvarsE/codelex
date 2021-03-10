@@ -1,15 +1,17 @@
 <?php
 
 
-class Car implements CarInterface
+class Car implements DriverInterface
 {
     private string $name;
-    private array $speed;
+    private int $minSpeed;
+    private int $maxSpeed;
 
-    public function __construct(string $name, array $speed)
+    public function __construct(string $name, int $minSpeed, int $maxSpeed)
     {
         $this->name = $name;
-        $this->speed = $speed;
+        $this->minSpeed = $minSpeed;
+        $this->maxSpeed = $maxSpeed;
     }
 
     public function getName(): string
@@ -17,13 +19,21 @@ class Car implements CarInterface
         return $this->name;
     }
 
+    public function getMinSpeed(): int
+    {
+        return $this->minSpeed;
+    }
+
+    public function getMaxSpeed(): int
+    {
+        return $this->maxSpeed;
+    }
+
 
     public function drive(): int
     {
-        try {
-            return random_int($this->speed[0], $this->speed[1]);
-        } catch (Exception $e) {
-        }
+        return random_int($this->minSpeed, $this->maxSpeed);
+
     }
 
 }
