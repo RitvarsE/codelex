@@ -3,19 +3,19 @@
 
 class CarCollection
 {
-    private array $cars;
+    private array $drivers;
 
-    public function addCar(Car $car): void
+    public function addDriver(DriverInterface $driver): void
     {
-        $this->cars[] = $car;
+        $this->drivers[] = $driver;
     }
 
-    public function getCars(): array
+    public function getDrivers(): array
     {
-        return $this->cars;
+        return $this->drivers;
     }
-    public function getCarCount(): int
+    public function getDriverCount(): int
     {
-        return count($this->cars);
+        return count($this->drivers);
     }
 }

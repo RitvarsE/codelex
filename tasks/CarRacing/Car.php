@@ -19,17 +19,6 @@ class Car implements DriverInterface
         return $this->name;
     }
 
-    public function getMinSpeed(): int
-    {
-        return $this->minSpeed;
-    }
-
-    public function getMaxSpeed(): int
-    {
-        return $this->maxSpeed;
-    }
-
-
     public function drive(): int
     {
         return random_int($this->minSpeed, $this->maxSpeed);
