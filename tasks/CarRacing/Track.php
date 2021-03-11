@@ -30,18 +30,6 @@ class Track
         return strpos($this->track[$driver], $this->cars->getCars()[$driver]->getName());
     }
 
-    public function setDriverPosition(int $driver): void
-    {
-        $this->track[$driver] =
-            substr_replace($this->drawTrack(), $this->cars->getCars()[$driver]->getName(),
-                $this->getDriverPosition($driver) + $this->cars->getCars()[$driver]->drive(), 1);
-    }
-
-    public function finished(int $driver): bool
-    {
-        return $this->getDriverPosition($driver) >= $this->getLength() - 1;
-    }
-
     public function setFinished(int $driver): void
     {
         $this->track[$driver] = substr_replace($this->drawTrack(), $this->cars->getCars()[$driver]->getName(), -1, 1);
@@ -54,25 +42,11 @@ class Track
         }
     }
 
-    public function move(): void
+    public function move(int $driver): void
     {
-        for ($x = 0; $x < $this->cars->getCarCount(); $x++) {
-            $car = $this->cars->getCars()[$x];
-            if ($this->getDriverPosition($x) + $car->drive() >= $this->getLength() - 1) {
-                $this->setFinished($x);
-                if (!in_array($car->getName(), $this->places, true)) {
-                    $this->places[] = $car->getName();
-                }
-
-            }
-            $this->setDriverPosition($x);
-            if ($this->finished($x)) {
-                $this->setFinished($x);
-                if (!in_array($car->getName(), $this->places, true)) {
-                    $this->places[] = $car->getName();
-                }
-            }
-        }
+        $this->track[$driver] =
+            substr_replace($this->drawTrack(), $this->cars->getCars()[$driver]->getName(),
+                $this->getDriverPosition($driver) + $this->cars->getCars()[$driver]->drive(), 1);
     }
 
     public function track(): array
@@ -88,6 +62,11 @@ class Track
     public function getCars(): CarCollection
     {
         return $this->cars;
+    }
+
+    public function setPlaces(string $driver): void
+    {
+        $this->places[] = $driver;
     }
 
 }
