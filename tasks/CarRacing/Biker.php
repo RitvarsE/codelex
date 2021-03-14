@@ -1,13 +1,13 @@
 <?php
 
 
-class Car implements DriverInterface
+class Biker implements DriverInterface
 {
     private string $name;
     private int $minSpeed;
     private int $maxSpeed;
-    private const MAX_SPEED = 10;
     private const MIN_SPEED = 1;
+    private const MAX_SPEED = 10;
 
     public function __construct(string $name, int $minSpeed, int $maxSpeed)
     {
@@ -26,6 +26,5 @@ class Car implements DriverInterface
         return random_int($this->minSpeed, $this->maxSpeed);
 
     }
-
 
 }

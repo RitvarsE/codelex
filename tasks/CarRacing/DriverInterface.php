@@ -2,5 +2,8 @@
 
 interface DriverInterface
 {
-    public function drive(): int;
+    public function getName(): string;
+
+    public function getSpeed(): int;
+
 }
